@@ -1,0 +1,269 @@
+package MiniProjectR;
+
+import java.util.*;
+//import java.util.concurrent.TimeUnit;
+class Member
+{
+	public int serialNo;
+	private String fullName;
+	private String age;
+	private String gender;
+	private String mobileNo;
+	private String packageName;
+	private String rateOfPackage;
+	private Date dateOfJoining;
+	private Date dateOfExpiry;
+	private String timeSlot;
+	public String paymentStatus;
+	
+	public Member()
+	{
+		
+	}
+	public Member(int serialNo, String fullName, String age, String gender, String mobileNo, String packageName,
+			String rateOfPackage,Date dateOfJoining,Date dateOfExpiry, String timeSlot, String paymentStatus)
+	{
+		this.serialNo=serialNo;
+		this.fullName = fullName;
+		this.age=age; 
+		this.gender=gender;
+		this.mobileNo=mobileNo;
+		this.packageName=packageName;
+		this.rateOfPackage=rateOfPackage;
+		this.dateOfJoining= dateOfJoining;
+		this.dateOfExpiry=dateOfExpiry;
+		this.timeSlot = timeSlot;
+		this.paymentStatus= paymentStatus;;
+	}
+	
+	public String toString()
+	{
+		return ("\n Serial No: "+this.serialNo+"\n Name: "+this.fullName+"\n Age: " +this.age+"\n Gender: "
+				+this.gender+"\n Mobile No: "+this.mobileNo+"\n Packege name "+this.packageName+"\n Rate of package: "
+				+this.rateOfPackage+"\n Joining date: "+this.dateOfJoining+"\n Expiry date: "+this.dateOfExpiry+
+				"\n Time slot: "+this.timeSlot+"\n Payment Status: "+this.paymentStatus+"\n");
+		
+	}
+	public String getName() {
+		
+		return fullName;
+	}
+}
+class NewMember
+{
+	private int size;
+	private int total;
+	private int front;
+	private int rear;
+	private Member arr[];
+
+	public NewMember()
+	{
+		size=3;
+		total=0;
+		front=0;
+		rear=0;
+		arr= new Member[size];
+	}
+	
+	public NewMember(int size)
+	{
+		this.size=size;
+		total=0;
+		front=0;
+		rear=0;
+		arr= new Member[this.size];
+	}
+	
+	public void addMember(Member item) 
+	{
+		if(isFull())
+		{
+			System.out.println("Sorry Member list is Full you can't add this member to list.");
+		}
+		else
+		{
+			arr[rear]=item;
+			total++;
+			rear++;
+		}
+	}
+	
+	public void removeMember()
+	{
+		if(!isEmpty())
+		{
+			Member item = arr[front];
+		
+			total--;
+			front++;
+			System.out.println("Deleted Member "+item);
+		}
+		else
+		{
+			System.out.println(" ");
+		}
+	}
+	
+	public boolean isFull()
+	{
+		if(size==total)
+		{
+			return true;
+		}
+		else {return false;}
+	}
+	
+	public boolean isEmpty()
+	{
+		if(total==0)
+		{
+			System.out.println("Member list is Empty. ");
+			return true;		
+		}
+		else {
+			System.out.println("Member list is Available. ");
+			return false;}
+	}
+	
+	public void viewRecord()
+	{
+		//System.out.println("arr length = "+arr.length);
+		if(total != 0)
+		{
+			for(int i=front; i< rear; i++)
+			{
+			System.out.println(" "+arr[i].toString());
+			}
+		}
+		else
+		{
+			System.out.print(" No Records.");
+		}
+	}
+
+	public void search(String name)
+    {
+		//System.out.println("name "+name);
+        for (int i = 0; i < arr.length; i++)
+        {
+            Member s = arr[i];
+          //  System.out.println("s.getName() "+s.getName());
+            if (s.getName().equalsIgnoreCase(name))
+            {
+            	System.out.println("Found Below Details : ");
+                System.out.println(s.toString());
+            }
+        }
+        if(total == 0) {
+        	System.out.println("We are really Sorry, We don't have this Member registered.");
+        }
+    }
+	public boolean paymentStatus(int memberId)
+	{
+		for (int i=0;i<=rear;i++) {
+			if(arr[i].serialNo==memberId) {
+				System.out.println("Payment Status = "+arr[i].paymentStatus);
+				return true;
+			}	
+		}
+		return false;
+	}	
+
+	public int countMember() {
+		int item= total;
+		return item;
+	}	
+}
+public class GymManage {
+
+	public static void main(String[] args)
+	{
+		Scanner sc = new Scanner(System.in);
+		
+		NewMember q = new NewMember();
+		
+		 System.out.println("Welcome to Green Park Fitness Club\n");          
+	        char ch;
+	        do    
+	        {
+	            System.out.println("\nChoose option to \n");
+	            System.out.println("1. Registration ");
+	            System.out.println("2. Member Record ");
+	            System.out.println("3. Remove member from list");
+	            System.out.println("4. Search member");
+	            System.out.println("5. Count member");
+	            System.out.println("6. Check empty"); 
+	            System.out.println("7. Check Payment Details"); 
+	 
+	            int choice = sc.nextInt();            
+	            switch (choice)
+	            {
+	            case 1 : 
+	            	System.out.println("Enter your serialNo: ");
+	            	int serialNo= sc.nextInt();
+	            	System.out.println("Enter your FullName details: ");
+	                sc.nextLine();
+	                String  fullName= sc.nextLine();
+	                System.out.println("Enter your Age details: ");
+	                String  age= sc.nextLine();
+	                System.out.println("Enter your Gender: ");
+	                String  gender= sc.nextLine();
+	                System.out.println("Enter your mobileNo details: ");
+	                String  mobileNo= sc.nextLine();
+	                System.out.println("Enter your packageName details: ");
+	                String  packageName= sc.nextLine();
+	                System.out.println("Enter your rateOfPackage details: ");
+	                String  rateOfPackage= sc.nextLine();
+	                System.out.println("Enter your timeSlot details: ");
+	                String  timeSlot= sc.nextLine();
+	                System.out.println("Enter your Payment Status");
+				    String paymentStatus= sc.nextLine();
+
+	        	Calendar cal = Calendar.getInstance(); 
+	        	cal.add(Calendar.MONTH, 1);
+	                Date expiryDate= cal.getTime();
+	                
+	                Member m = new Member(serialNo, fullName, age, gender, mobileNo, packageName,
+	                 			rateOfPackage, new Date(),expiryDate ,timeSlot, paymentStatus);
+	            
+	                		q.addMember(m);                     
+	                break;    
+	            case 2 : 
+	                System.out.print("Member report:");
+	                q.viewRecord();                     
+	                break;    
+	            case 3 : 
+	                System.out.println("Member deleted successfully:");
+	                q.removeMember();                     
+	                break;                         
+	            case 4 : 
+	                System.out.println("Enter member name to search:");
+	                sc.nextLine();
+	                String  inputName= sc.nextLine();
+	               q.search(inputName);
+	                break;                                          
+	            case 5 : 
+	                System.out.println("Member count = "+ q.countMember());
+	                break;     
+	            case 6 :  
+	                System.out.println("Member list status : ");
+	                q.isEmpty();
+	                break;     
+	            case 7 :  
+			System.out.println("Enter Member Id");
+			int memberId= sc.nextInt();
+			if(!q.paymentStatus(memberId)) {
+			System.out.println("Member not found ");
+			}
+			break; 
+	            default : 
+	                System.out.println("Wrong Entry \n ");
+	                break;   
+	            }
+	            System.out.println("\nDo you want to continue (Type y or n) \n");
+	            ch = sc.next().charAt(0);                        
+	        } while (ch == 'Y'|| ch == 'y');  
+		sc.close();
+	  }
+}
